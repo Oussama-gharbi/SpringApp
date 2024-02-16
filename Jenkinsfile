@@ -17,6 +17,8 @@ pipeline {
                 script {
                     sh 'mvn checkstyle:checkstyle' 
                 }
+            }
+        }
         
         stage('Unit Test') {
             
@@ -24,20 +26,18 @@ pipeline {
                 script {
                     sh 'mvn test' 
                 }
-         
+            }
+        }
         stage('integration Test') {
             
             steps {
                 script {
                     sh 'mvn verify' 
                 }
-
+            }
+            }
                 
-
-
-
-
-                
+              
             }
         }
     }
