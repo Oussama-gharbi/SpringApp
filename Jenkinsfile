@@ -37,17 +37,15 @@ pipeline {
             }
             }
 */
-        stage('Sonarqube Analysis')
+        stage('Sonarqube Analysis') {
             steps {
             withSonarQubeEnv(credentialsId: 'sonarqube-token', installationName: 'sonar-server1') {
-              mvn sonar:sonar \
+             sh' mvn sonar:sonar \
                     -Dsonar.projectKey=SpringApp \
-                    -Dsonar.host.url=http://10.165.147.223:9000 
+                    -Dsonar.host.url=http://10.165.147.223:9000'
                     }
-
-
             }
                 
-              
+        }  
             }
         }
