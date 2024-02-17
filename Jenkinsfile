@@ -3,6 +3,12 @@ pipeline {
     tools {
         maven 'maven'
     }
+    environment{
+    IMAGETAG = "10.165.147.221" 
+    DOCKER_IMAGE_NAME = "devops-project"
+
+        
+    }
        stages {
       stage('Checkout') {
             steps {
@@ -11,7 +17,7 @@ pipeline {
             }
         }
         
-       /*   stage('lint Test') {
+         stage('lint Test') {
             
             steps {
                 script {
@@ -36,7 +42,7 @@ pipeline {
                 }
             }
             }
-*/
+
         stage('CODE ANALYSIS with SONARQUBE') {
 
             environment {
@@ -56,6 +62,18 @@ pipeline {
                 //     waitForQualityGate abortPipeline: true
                 // }
             }
+        stage('Build Image') {
+
+            sh 'docker build -t ${IMAGETAG}/$DOCKER_IMAGE_NAME .'
+
+
+
+    
+            }
+
+
+
+            
         } 
             }
         }
