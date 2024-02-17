@@ -47,8 +47,7 @@ pipeline {
 
             environment {
                 scannerHome = tool 'sonar-scanner'
-            }
-
+                       }
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=SpringApp \
@@ -62,18 +61,14 @@ pipeline {
                 //     waitForQualityGate abortPipeline: true
                 // }
             }
+        }
         stage('Build Image') {
-
-            sh 'docker build -t ${IMAGETAG}/$DOCKER_IMAGE_NAME .'
-
-
-
-    
+           steps {
+                sh 'docker build -t ${IMAGETAG}/$DOCKER_IMAGE_NAME .'
             }
-
-
-
             
+               }
+         
         } 
             }
-        }
+        
