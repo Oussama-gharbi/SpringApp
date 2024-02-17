@@ -26,7 +26,11 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('sonar-server') {
-                        sh "mvn sonar:sonar -Dintegration-tests.skip=true -Dmaven.test.failure.ignore=true"
+                        sh "mvn sonar:sonar \
+                        -Dsonar.projectKey=SpringApp \
+                        -Dsonar.host.url=http://10.165.147.223:9000/ \
+                        -Dintegration-tests.skip=true\
+                        -Dmaven.test.failure.ignore=true"
                     }
                     timeout(time: 1, unit: 'MINUTES') {
                         def qg = waitForQualityGate()
