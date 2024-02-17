@@ -61,6 +61,35 @@ pipeline {
                 //     waitForQualityGate abortPipeline: true
                 // }
             }
+
+
+post {
+        
+        success {
+            // Mark the build as successful in GitHub using the GitHub Status API
+            script {
+                def commitSha = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                // 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
+                // Replace 'your-job-name' with the name of your Jenkins job
+                // Replace 'your-repo-owner' and 'your-repo-name' with the owner and name of your GitHub repository
+                // Replace 'your-github-access-token' with a personal access token with 'repo' scope
+                // See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+                withCredentials([string(credentialsId: 'github-connexion	', variable: 'GITHUB_TOKEN')]) {
+                    httpRequest (
+                        contentType: 'APPLICATION_JSON',
+                        httpMode: 'POST',
+                        authentication: 'none',
+                        url: "https://api.github.com/repos/Oussama-gharbi/SpringApp/statuses/${commitSha}?access_token=${GITHUB_TOKEN}",
+                        requestBody: '{"state": "success", "description": "Jenkins build passed", "context": "Jenkins/code-analysis"}'
+                    )
+                }
+
+
+
+
+        }
+        }
+}
         }
         stage('Build Image') {
            steps {
@@ -71,4 +100,3 @@ pipeline {
          
         } 
             }
-        
