@@ -29,7 +29,7 @@ pipeline {
             }
 
             steps {
-                withSonarQubeEnv('sonar-server') {
+                withSonarQubeEnv('mytoken') {
                     sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=SpringApp \
                    -Dsonar.projectName=SpringApp \
                    -Dsonar.projectVersion=1.0 \
