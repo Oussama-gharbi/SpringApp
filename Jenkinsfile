@@ -79,7 +79,7 @@ post {
                         contentType: 'APPLICATION_JSON',
                         httpMode: 'POST',
                         authentication: 'none',
-                        url: "https://api.github.com/repos/Oussama-gharbi/SpringApp/statuses/${commitSha}?access_token=${GITHUB_TOKEN}",
+                        url: "https://api.github.com/repos/Oussama-gharbi/SpringApp/statuses/${commitSha}?access_token=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",
                         requestBody: '{"state": "success", "description": "Jenkins build passed", "context": "Jenkins/code-analysis"}'
                     )
                 }
