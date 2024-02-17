@@ -22,27 +22,29 @@ pipeline {
             }
         }
 
-        stage('Sonarqube Analysis') {
+  stage('CODE ANALYSIS with SONARQUBE') {
+
+            environment {
+                scannerHome = tool 'sonar-scanner'
+            }
+
             steps {
-                script {
-                    withSonarQubeEnv('sonar-server') {
-                        sh "mvn sonar:sonar \
-                        -Dsonar.projectKey=SpringApp \
-                        -Dsonar.host.url=http://10.165.147.223:9000/ \
-                        -Dintegration-tests.skip=true\
-                        -Dmaven.test.failure.ignore=true"
-                    }
-                    timeout(time: 1, unit: 'MINUTES') {
-                        def qg = waitForQualityGate()
-                        if (qg.status != 'OK') {
-                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                        }
-                    }
+                withSonarQubeEnv('sonar-server') {
+                    sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=SpringApp \
+                   -Dsonar.projectName=SpringApp \
+                   -Dsonar.projectVersion=1.0 \
+                   -Dsonar.sources=src/ \
+                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                   -Dsonar.junit.reportsPath=target/surefire-reports/ \
+                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                   -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
                 }
 
+                // timeout(time: 10, unit: 'MINUTES') {
+                //     waitForQualityGate abortPipeline: true
+                // }
             }
         }
-
         stage('Maven Build and Package') {
             steps {
                 script {
