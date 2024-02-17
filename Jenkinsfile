@@ -40,7 +40,7 @@ pipeline {
         stage('Sonarqube Analysis') {
             steps {
             withSonarQubeEnv(credentialsId: 'sonarqube-token', installationName: 'sonar-server1') {
-             sh " mvn sonar:sonar  sh "mvn sonar:sonar -Dintegration-tests.skip=true -Dmaven.test.failure.ignore=true"
+             sh "mvn sonar:sonar -Dintegration-tests.skip=true -Dmaven.test.failure.ignore=true"
                     }
             }
                 
