@@ -1,4 +1,4 @@
-pipeline {
+o pipeline {
     agent any
     tools {
         maven 'maven'
@@ -70,7 +70,8 @@ pipeline {
         
                 stage('Build Image') {
            steps {
-                sh 'docker build -t ${DOCKER_IMAGE_FULL_NAME} .'
+                sh '''docker build -t ${DOCKER_IMAGE_FULL_NAME} .
+                  echo ${DOCKER_IMAGE_FULL_NAME}'''
             }
             
                }
