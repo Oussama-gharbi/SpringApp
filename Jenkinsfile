@@ -1,4 +1,4 @@
- pipeline {
+o pipeline {
     agent any
     tools {
         maven 'maven'
@@ -76,22 +76,18 @@
             
                }
 
-       stage('Push Docker Image to Nexus') {
+         stage('Docker Build and Push to Nexus') {
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: "spring-boot", 
-                classifier: '',
-                 file: "${DOCKER_IMAGE_FULL_NAME}", 
-                 type: 'docker']], 
-                 credentialsId: "${NEXUS_CREDENTIALS_ID}", 
-                 groupId: '',
-                  nexusUrl: "${NEXUS_URL}",
-                   nexusVersion: '3',
-                   protocol: 'docker', 
-                   repository: "${DOCKER_IMAGE_REPO}"
+                script {
+                    
+                        withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", usernameVariable: 'USER', passwordVariable: 'PASSWORD')]){
+                        sh 'echo $PASSWORD | docker login -u $USER --password-stdin $NEXUS_URL'
+                        //sh 'docker system prune -af'
+                        sh "docker build -t $DOCKER_IMAGE_FULL_NAME --no-cache --pull ."
+                        sh "docker push $DOCKER_IMAGE_FULL_NAME"
+                    }
+                }
             }
-
-
-         
-        } 
+        }
 }
 }
