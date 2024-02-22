@@ -70,8 +70,8 @@ o pipeline {
         
                 stage('Build Image') {
            steps {
-                sh '''docker build -t ${DOCKER_IMAGE_FULL_NAME} .
-                  echo ${DOCKER_IMAGE_FULL_NAME}'''
+                sh 'docker build -t ${DOCKER_IMAGE_FULL_NAME} . '
+                 sh 'echo ${DOCKER_IMAGE_FULL_NAME} '
             }
             
                }
