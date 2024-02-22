@@ -63,8 +63,8 @@ pipeline {
             }
 
 }
-        }
-        stage('Build Image') {
+        
+                stage('Build Image') {
            steps {
                 sh 'docker build -t ${IMAGETAG}/$DOCKER_IMAGE_NAME .'
             }
@@ -72,4 +72,4 @@ pipeline {
                }
          
         } 
-            }
+}
