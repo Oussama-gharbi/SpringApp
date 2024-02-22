@@ -5,7 +5,7 @@ pipeline {
     }
     environment{
    
-    NEXUS_URL = 'nexus.com:8082' // Nexus Repository Manager URL
+    NEXUS_URL = 'nexus.com:8084' // Nexus Repository Manager URL
     NEXUS_CREDENTIALS_ID = 'nexus-cred' // Jenkins credentials ID for Nexus authentication
     DOCKER_IMAGE_NAME = "devops-project" // Docker image name
     DOCKER_IMAGE_TAG = 'v1.0' // Docker image tag
