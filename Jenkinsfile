@@ -4,13 +4,17 @@ pipeline {
         maven 'maven'
     }
     environment{
-    IMAGETAG = "10.165.147.221" 
-    DOCKER_IMAGE_NAME = "devops-project"
-
+   
+    NEXUS_URL = 'http://10.165.147.221:8081/' // Nexus Repository Manager URL
+    NEXUS_CREDENTIALS_ID = 'nexus-cred' // Jenkins credentials ID for Nexus authentication
+    DOCKER_IMAGE_NAME = "devops-project" // Docker image name
+    DOCKER_IMAGE_TAG = 'v1.0' // Docker image tag
+    DOCKER_IMAGE_FULL_NAME = "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}" // Full Docker image name including tag
+    DOCKER_IMAGE_REPO = 'docker-hub' // Nexus Docker repository name
         
     }
        stages {
-    stage('Checkout') {
+      stage('Checkout') {
             steps {
                 checkout scm
                 echo 'Pulling... ' + env.GIT_BRANCH
@@ -26,7 +30,7 @@ pipeline {
             }
         }
         
-       stage('Unit Test') {
+        stage('Unit Test') {
             
             steps {
                 script {
@@ -64,12 +68,29 @@ pipeline {
 
 }
         
-               stage('Build Image') {
+                stage('Build Image') {
            steps {
                 sh 'docker build -t ${IMAGETAG}/$DOCKER_IMAGE_NAME .'
             }
             
                }
+
+       stage('Push Docker Image to Nexus') {
+            steps {
+                nexusArtifactUploader artifacts: [[artifactId: "${DOCKER_IMAGE_NAME}", 
+                classifier: '',
+                 file: "${DOCKER_IMAGE_FULL_NAME}", 
+                 type: 'docker']], 
+                 credentialsId: "${NEXUS_CREDENTIALS_ID}", 
+                 groupId: '',
+                  nexusUrl: "${NEXUS_URL}",
+                   nexusVersion: '3',
+                   protocol: 'docker', 
+                   repository: "${DOCKER_IMAGE_REPO}"
+            }
+
+
          
         } 
+}
 }
