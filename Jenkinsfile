@@ -47,7 +47,7 @@ pipeline {
             }
             }
 
-        stage('CODE ANALYSIS with SONARQUBE') {
+       /* stage('CODE ANALYSIS with SONARQUBE') {
 
             environment {
                 scannerHome = tool 'sonar-scanner'
@@ -66,7 +66,7 @@ pipeline {
                 // }
             }
 
-}
+}*/
         
                 stage('Build Image') {
            steps {
