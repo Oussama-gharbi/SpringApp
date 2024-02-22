@@ -10,12 +10,12 @@ pipeline {
         
     }
        stages {
-    stage('Checkout') {
+  /*  stage('Checkout') {
             steps {
                 checkout scm
                 echo 'Pulling... ' + env.GIT_BRANCH
             }
-        }
+        }*/
         
        /*  stage('lint Test') {
             
