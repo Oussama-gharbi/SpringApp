@@ -77,7 +77,7 @@ pipeline {
 
        stage('Push Docker Image to Nexus') {
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: "${DOCKER_IMAGE_NAME}", 
+                nexusArtifactUploader artifacts: [[artifactId: "spring-boot", 
                 classifier: '',
                  file: "${DOCKER_IMAGE_FULL_NAME}", 
                  type: 'docker']], 
