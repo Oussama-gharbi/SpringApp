@@ -83,7 +83,7 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", usernameVariable: 'USER', passwordVariable: 'PASSWORD')]){
                         sh 'echo $PASSWORD | docker login -u $USER --password-stdin $NEXUS_URL'
                         //sh 'docker system prune -af'
-                        sh "docker build -t $DOCKER_IMAGE_FULL_NAME --no-cache --pull ."
+                        sh "docker build -t $DOCKER_IMAGE_FULL_NAME ."
                         sh "docker push $DOCKER_IMAGE_FULL_NAME"
                     }
                 }
