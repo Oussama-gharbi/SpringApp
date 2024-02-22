@@ -70,7 +70,7 @@ pipeline {
         
                 stage('Build Image') {
            steps {
-                sh 'docker build -t ${IMAGETAG}/$DOCKER_IMAGE_NAME .'
+                sh 'docker build -t 10.165.147.221:8083/$DOCKER_IMAGE_NAME .'
             }
             
                }
