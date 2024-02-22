@@ -10,40 +10,40 @@ pipeline {
         
     }
        stages {
-  /*  stage('Checkout') {
+    stage('Checkout') {
             steps {
                 checkout scm
                 echo 'Pulling... ' + env.GIT_BRANCH
             }
-        }*/
+        }
         
-       /*  stage('lint Test') {
+         stage('lint Test') {
             
             steps {
                 script {
                     sh 'mvn checkstyle:checkstyle' 
                 }
             }
-        }*/
+        }
         
-       /* stage('Unit Test') {
+       stage('Unit Test') {
             
             steps {
                 script {
                     sh 'mvn test' 
                 }
             }
-        }*/
-      /*  stage('integration Test') {
+        }
+        stage('integration Test') {
             
             steps {
                 script {
                     sh 'mvn verify' 
                 }
             }
-            }*/
+            }
 
-       /* stage('CODE ANALYSIS with SONARQUBE') {
+        stage('CODE ANALYSIS with SONARQUBE') {
 
             environment {
                 scannerHome = tool 'sonar-scanner'
@@ -62,14 +62,14 @@ pipeline {
                 // }
             }
 
-}*/
+}
         
-            /*    stage('Build Image') {
+               stage('Build Image') {
            steps {
                 sh 'docker build -t ${IMAGETAG}/$DOCKER_IMAGE_NAME .'
             }
             
-               }*/
+               }
          
         } 
 }
