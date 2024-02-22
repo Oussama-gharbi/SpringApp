@@ -9,7 +9,7 @@ pipeline {
     NEXUS_CREDENTIALS_ID = 'nexus-cred' // Jenkins credentials ID for Nexus authentication
     DOCKER_IMAGE_NAME = "devops-project" // Docker image name
     DOCKER_IMAGE_TAG = 'v1.0' // Docker image tag
-    DOCKER_IMAGE_FULL_NAME = "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}" // Full Docker image name including tag
+    DOCKER_IMAGE_FULL_NAME = "10.165.147.221/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}" // Full Docker image name including tag
     DOCKER_IMAGE_REPO = 'docker-hub' // Nexus Docker repository name
         
     }
@@ -70,7 +70,7 @@ pipeline {
         
                 stage('Build Image') {
            steps {
-                sh 'docker build -t 10.165.147.221:8083/$DOCKER_IMAGE_NAME .'
+                sh 'docker build -t 10.165.147.221:8083/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .'
             }
             
                }
