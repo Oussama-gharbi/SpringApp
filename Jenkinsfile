@@ -94,7 +94,7 @@ pipeline {
           steps {
              script{
              sshagent(['secret_key']) {
-            sh 'ssh user-ansible@10.165.147.122 "ansible-playbook run_docker.yml"'
+            sh 'ssh -o StrictHostKeyChecking=no  user-ansible@10.165.147.122 "ansible-playbook run_docker.yml"'
 }
                    
              }
