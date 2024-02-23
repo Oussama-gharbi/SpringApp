@@ -90,7 +90,7 @@ pipeline {
             }
         }
 
-    stage('Deploy App in testserver){
+    stage('Deploy App in testserver'){
           steps {
              script{
              sshagent(['secret_key']) {
