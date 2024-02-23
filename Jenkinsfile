@@ -89,5 +89,18 @@ pipeline {
                 }
             }
         }
+
+    stage('Deploy App in testserver){
+          steps {
+             script{
+             sshagent(['secret_key']) {
+            sh 'ansible-playbook run_docker.yml'
+}
+                   
+             }
+                            
+          }
+
+          }
 }
 }
