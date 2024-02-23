@@ -16,7 +16,7 @@ public class DevopsProjectSamplesApplication {
     }
 
     @GetMapping
-    public String sayHello(){ return "Hello from new branch !";}
+    public String sayHello(){ return "Hello from developer branch :-) !";}
 
 
 }
