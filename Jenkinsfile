@@ -1,9 +1,9 @@
-def getVersionFromPom() {
-    def pomFile = new File('pom.xml')
-    def pomXml = new XmlSlurper().parse(pomFile)
-    return pomXml.version.text()
-}
-def version = getVersionFromPom()
+//def getVersionFromPom() {
+//    def pomFile = new File('pom.xml')
+//    def pomXml = new XmlSlurper().parse(pomFile)
+//    return pomXml.version.text()
+//}
+//def version = getVersionFromPom()
 pipeline {
     agent any
     tools {
@@ -11,7 +11,7 @@ pipeline {
     }
     environment{
         
-  //  version = readMavenPom().getVersion() // it needs pipeline utility steps plugin
+   version = readMavenPom().getVersion() // it needs pipeline utility steps plugin
     NEXUS_URL = '10.165.147.221:8083' // Nexus Repository Manager URL
     NEXUS_CREDENTIALS_ID = 'nexus-cred' // Jenkins credentials ID for Nexus authentication
     DOCKER_IMAGE_NAME = "devops-project" // Docker image name
