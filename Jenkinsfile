@@ -101,7 +101,7 @@ pipeline {
              sshagent(['secret_key']) {
             
             sh '''
-                 ssh -o StrictHostKeyChecking=no  user-ansible@10.165.147.122 "sed -i 's/:v1/:v2/g' /etc/ansible/hosts"
+                 ssh -o StrictHostKeyChecking=no  user-ansible@10.165.147.122 "sudo sed -i 's/:v1/:v2/g' /etc/ansible/hosts"
                  ssh -o StrictHostKeyChecking=no  user-ansible@10.165.147.122 "ansible-playbook /etc/ansible/run_docker.yml"'''
 }
                    
