@@ -19,7 +19,14 @@ pipeline {
                 cleanWs()
             }
         }
-        stage("increment version") {
+             
+      stage('Checkout') {
+            steps {
+                checkout scm
+                echo 'Pulling... ' + env.GIT_BRANCH
+            }
+        }
+            stage("increment version") {
             steps {
                 script {
                     echo 'incrementing app version...'
@@ -29,13 +36,7 @@ pipeline {
                   env.DOCKER_IMAGE_TAG = env.DOCKER_IMAGE_TAG + "$version-$buildNumber"
                 }
             }
-        }         
-      stage('Checkout') {
-            steps {
-                checkout scm
-                echo 'Pulling... ' + env.GIT_BRANCH
-            }
-        }
+        }   
         
          stage('lint Test') {
             
