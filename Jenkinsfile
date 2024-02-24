@@ -8,7 +8,7 @@ pipeline {
     NEXUS_URL = '10.165.147.221:8083' // Nexus Repository Manager URL
     NEXUS_CREDENTIALS_ID = 'nexus-cred' // Jenkins credentials ID for Nexus authentication
     DOCKER_IMAGE_NAME = "devops-project" // Docker image name
-    //DOCKER_IMAGE_TAG = 'v5.0' // Docker image tag
+   DOCKER_IMAGE_TAG = 'v5.0' // Docker image tag
     DOCKER_IMAGE_FULL_NAME = "${NEXUS_URL}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}" // Full Docker image name including tag
     DOCKER_IMAGE_REPO = 'docker-hub' // Nexus Docker repository name
         
@@ -24,9 +24,9 @@ pipeline {
                 script {
                     echo 'incrementing app version...'
                     sh 'mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit'
-                    def matcher = readFile('pom.xml') =~ /<version>(.*)<\/version>/
-                    def version = matcher[0][1]
-                    env.DOCKER_IMAGE_TAG = env.DOCKER_IMAGE_TAG + "$version-$buildNumber"
+                //    def matcher = readFile('pom.xml') =~ /<version>(.*)<\/version>/
+               //     def version = matcher[0][1]
+                //    env.DOCKER_IMAGE_TAG = env.DOCKER_IMAGE_TAG + "$version-$buildNumber"
                 }
             }
         }         
