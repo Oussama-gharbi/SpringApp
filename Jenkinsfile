@@ -124,9 +124,8 @@ pipeline {
           }
     stage('commit version update'){
         steps{
-            script{
-                withCredentials([usernamePassword(credentialsId: 'github-cred', passwordVariable: 'PASS', usernameVariable: 'USER')] )
-                
+                  
+             withCredentials([usernamePassword(credentialsId: 'github-cred', passwordVariable: 'PASS', usernameVariable: 'USER')] ) {
                 sh 'git remote set-url origin https://${USER}:${PASS}github.com/Oussama-gharbi/SpringApp.git'
                 sh 'git add . '
                 sh 'git commit -m "ci: version pump"'
@@ -134,6 +133,7 @@ pipeline {
         }
     }
            
+}
 }
 }
 }
