@@ -4,7 +4,7 @@ pipeline {
         maven 'maven'
     }
     environment{
-    Version = readMavenPom().getVersion() // it needs pipeline utility steps plugin
+    version = readMavenPom().getVersion() // it needs pipeline utility steps plugin
     NEXUS_URL = '10.165.147.221:8083' // Nexus Repository Manager URL
     NEXUS_CREDENTIALS_ID = 'nexus-cred' // Jenkins credentials ID for Nexus authentication
     DOCKER_IMAGE_NAME = "devops-project" // Docker image name
